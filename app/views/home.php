@@ -7,35 +7,35 @@
 <table class="table table-stripped">
     <thead class="table-dark">
         <tr>
-            <th scope="col">Départ</th>
-            <th scope="col">Date</th>
-            <th scope="col">Heure</th>
-            <th scope="col">Destination</th>
-            <th scope="col">Date</th>
-            <th scope="col">Heure</th>
+            <th scope="col">Ville de départ</th>
+            <th scope="col">Date de départ</th>
+            <th scope="col">Heure de départ</th>
+
+            <th scope="col">Ville d'arrivée</th>
+            <th scope="col">Date d'arrivée</th>
+            <th scope="col">Heure d'arrivée</th>
+
             <th scope="col">Places disponibles</th>
         </tr>
-        </thead>
+    </thead>
+    
         <tbody>
-            <tr>
-                <td>Lyon</td>
-                <td>20/08/2026</td>
-                <td>08:00</td>
-                <td>Grenoble</td>
-                <td>20/08/2026</td>
-                <td>10:00</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Annecy</td>
-                <td>20/08/2026</td>
-                <td>10:00</td>
-                <td>Chambery</td>
-                <td>20/08/2026</td>
-                <td>12:00</td>
-                <td>2</td>
-            </tr>
-        </tbody>
+    <?php foreach ($trajets as $trajet): ?>
+        <tr>
+            <td><?= htmlspecialchars($trajet['ville_depart']) ?></td>
+            <td><?= date('d/m/Y', strtotime($trajet['depart_at'])) ?></td>
+            <td><?= date('H:i', strtotime($trajet['depart_at'])) ?></td>
+
+            <td><?= htmlspecialchars($trajet['ville_arrivee']) ?></td>
+            <td><?= date('d/m/Y', strtotime($trajet['arrivee_at'])) ?></td>
+            <td><?= date('H:i', strtotime($trajet['arrivee_at'])) ?></td>
+
+            <td><?= htmlspecialchars($trajet['places_disponibles']) ?></td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+      
+    
 </table>
 </main>
 
