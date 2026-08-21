@@ -2,7 +2,11 @@
 
 <main class="container mt-4">
 
-<h2 class="mb-3 text-secondary">Pour obtenir plus d'informations sur un trajet, veuillez vous connecter</h2>
+<?php if (isset($_SESSION['user'])): ?>
+    <h2 class="mb-4 text-secondary">Consultez les trajets disponibles</h2>
+    <?php else: ?>
+    <h2 class="mb-4 text-secondary">Veuillez vous connecter pour consulter les trajets disponibles</h2>
+<?php endif; ?>
 
 <table class="table table-stripped">
     <thead class="table-primary">
@@ -16,6 +20,7 @@
             <th scope="col">Heure d'arrivée</th>
 
             <th scope="col">Places disponibles</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
 
@@ -31,6 +36,13 @@
             <td><?= date('H:i', strtotime($trajet['arrivee_at'])) ?></td>
 
             <td><?= htmlspecialchars($trajet['places_disponibles']) ?></td>
+            <td>
+                <?php if (isset($_SESSION['user'])): ?>
+                    <a href="/trajets/<?= htmlspecialchars((string) $trajet['id']) ?>" 
+                    class="btn btn-primary btn-sm">
+                    Voir les détails</a>
+                <?php endif; ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 </tbody>

@@ -3,12 +3,12 @@
 $shost = 'localhost';
 $dbname = 'touche_pas_au_klaxon';
 $username = 'root';
-$password = '';
+$dbPassword = '';
 
 try {
     $pdo = new PDO("mysql:host=$shost;dbname=$dbname;charset=utf8mb4",
      $username, 
-     $password
+     $dbPassword
      );
 
      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

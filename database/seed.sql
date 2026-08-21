@@ -18,7 +18,7 @@ INSERT INTO agences (ville) VALUES
 
 
 
-SET @password_test = '$2y$10$/Lw/7MUXdZScSUo/VK5bDuBHpy3csAbJVXdQoBoIBC9paK0XUpn.O';
+SET @password_test = '$2y$10$GC8RgrHdBd.K.FT2TjSkDON5RMDdNtAJnPZQ5VjjZjBDz63urF0Xm';
 
 INSERT INTO users (nom, prenom, telephone, email, password, role) VALUES
 ('Martin', 'Alexandre', '0612345678', 'alexandre.martin@email.fr', @password_test, 'user'),

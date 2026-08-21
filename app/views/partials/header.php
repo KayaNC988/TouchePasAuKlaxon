@@ -11,6 +11,13 @@
         <nav class="navbar navbar-dark bg-primary rounded px-3 py-2">
         <a class="navbar-brand text-white" href="/">Touche Pas Au Klaxon</a>
 
-        <a class="btn btn-light" href="/login">Connexion</a>
- </nav>
- </header>
+        <?php if (isset($_SESSION['user'])): ?>
+            <div class="d-flex align-items-center gap-3">
+            <span class="text-white me-3">Bonjour, <?= htmlspecialchars($_SESSION['user']['prenom']) ?>!</span>
+            <a href="/logout" class="btn btn-outline-light">Se déconnecter</a>
+            </div>
+        <?php else: ?>
+            <a href="/login" class="btn btn-outline-light">Se connecter</a>
+        <?php endif; ?>
+        </nav>
+    </header>
