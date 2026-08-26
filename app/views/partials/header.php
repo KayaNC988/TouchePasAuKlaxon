@@ -13,6 +13,7 @@
 
         <?php if (isset($_SESSION['user'])): ?>
             <div class="d-flex align-items-center gap-3">
+                <a href="/trajets/create" class="btn btn-light">Créer un trajet</a>
             <span class="text-white me-3">Bonjour, <?= htmlspecialchars($_SESSION['user']['prenom']) ?>!</span>
             <a href="/logout" class="btn btn-outline-light">Se déconnecter</a>
             </div>
