@@ -3,6 +3,14 @@
 require __DIR__ . '/../partials/header.php'; ?>
 
 <main class="container mt-4">
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success mb-4" role="alert">
+            <?= htmlspecialchars($_SESSION['success']) ?>
+    </div>
+
+    <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    
     <h2 class="mb-4 text-secondary">Détails du trajet</h2>
 
     <div class=card>
@@ -22,6 +30,20 @@ require __DIR__ . '/../partials/header.php'; ?>
         <p><strong>Téléphone:</strong> <?= htmlspecialchars($trajet['auteur_telephone']) ?></p>
         <p><strong>Email:</strong> <?= htmlspecialchars($trajet['auteur_email']) ?></p>
         <p><strong>Nombre total de places :</strong> <?= htmlspecialchars($trajet['places_total']) ?></p>
+
+        <?php if ($isOwner): ?>
+            <div class="d-flex gap-2 mt-4">
+                <a href="/trajets/<?= (int) $trajet['id'] ?>/edit"
+                   class="btn btn-primary">Modifier</a>
+                   <form method="POST"
+                         action="/trajets/<?= (int) $trajet['id'] ?>/delete">
+                         <button type="submit"
+                                  class="btn btn-outline-danger">
+                                  Supprimer</button>
+        </form>
+        </div>
+        <?php endif; ?>               
+
         </div>
     </div>
     </main>

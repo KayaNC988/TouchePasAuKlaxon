@@ -26,6 +26,8 @@ $router->get('/logout', 'App\Controllers\AuthController@logout');
 $router->get('/trajets/create', 'App\Controllers\TrajetController@create');
 $router->post('/trajets', [TrajetController::class, 'store']);
 $router->get('/trajets/:id', 'App\Controllers\TrajetController@show');
-
+$router->get('/trajets/:id/edit', 'App\Controllers\TrajetController@edit');
+$router->post('/trajets/:id/edit', 'App\Controllers\TrajetController@update');
+$router->post('/trajets/:id/delete', [TrajetController::class, 'delete']);
 
 $router->run();

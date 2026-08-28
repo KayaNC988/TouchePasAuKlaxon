@@ -2,6 +2,14 @@
 
 <main class="container mt-4">
 
+<?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success mb-4" role="alert">
+        <?= htmlspecialchars($_SESSION['success']) ?>
+
+        <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+
 <?php if (isset($_SESSION['user'])): ?>
     <h2 class="mb-4 text-secondary">Consultez les trajets disponibles</h2>
     <?php else: ?>

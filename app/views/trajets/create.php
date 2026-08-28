@@ -1,6 +1,18 @@
 <?php require __DIR__ . '/../partials/header.php'; ?>
+<?php $old = $_SESSION['old'] ?? [];
+unset($_SESSION['old']);
+?>
 
 <main class="container my-5">
+
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger mb-4" role="alert">
+    <?= htmlspecialchars($_SESSION['error']) ?>
+</div>
+
+<?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-7">
     <h2 class="mb-4 text-secondary text-center">Proposer un trajet</h2>
@@ -58,8 +70,10 @@
                 <option value="">Choisir une agence</option>
 
                 <?php foreach ($agences as $agence): ?>
-                    <option value="<?= htmlspecialchars((string) $agence['id']) ?>">
-                        <?= htmlspecialchars($agence['ville']) ?>
+                    <option value="<?= htmlspecialchars((string) $agence['id']) ?>"
+                        <?= (($old['agence_depart_id'] ?? '') == $agence['id']) ? 'selected' : '' ?>
+                        >
+                         <?= htmlspecialchars($agence['ville']) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -75,6 +89,7 @@
                 name="depart_at"
                 id="depart_at"
                 class="form-control"
+                value="<?= htmlspecialchars($old['depart_at'] ?? '') ?>"
                 required
             >
         </div>
@@ -96,7 +111,9 @@
                 <option value="">Choisir une agence</option>
 
                 <?php foreach ($agences as $agence): ?>
-                    <option value="<?= htmlspecialchars((string) $agence['id']) ?>">
+                    <option value="<?= htmlspecialchars((string) $agence['id']) ?>"
+                        <?= (($old['agence_arrivee_id'] ?? '') == $agence['id']) ? 'selected' : '' ?>
+                        >
                         <?= htmlspecialchars($agence['ville']) ?>
                     </option>
                 <?php endforeach; ?>
@@ -113,6 +130,7 @@
                 name="arrivee_at"
                 id="arrivee_at"
                 class="form-control"
+                value="<?= htmlspecialchars($old['arrivee_at'] ?? '') ?>"
                 required
             >
         </div>
@@ -122,12 +140,14 @@
         Nombre total de places
     </label>
 
+    
     <input
         type="number"
         name="places_total"
         id="places_total"
         class="form-control"
         min="1"
+        value="<?= htmlspecialchars($old['places_total'] ?? '') ?>"
         required
     >
 </div>
@@ -148,6 +168,7 @@
     
 
     </form>
+   
         </div>
         </div>
 </main>
