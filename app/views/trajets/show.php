@@ -3,12 +3,19 @@
 require __DIR__ . '/../partials/header.php'; ?>
 
 <main class="container mt-4">
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success mb-4" role="alert">
-            <?= htmlspecialchars($_SESSION['success']) ?>
-    </div>
 
-    <?php unset($_SESSION['success']); ?>
+   <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success mb-4" id="flash-message" role="alert">
+            <?= htmlspecialchars($_SESSION['success']) ?>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="fermer">
+    </button>
+        </div>
+
+        <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
     
     <h2 class="mb-4 text-secondary">Détails du trajet</h2>
@@ -47,6 +54,14 @@ require __DIR__ . '/../partials/header.php'; ?>
         </div>
     </div>
     </main>
+<script>
+    const flashMessage = document.getElementById('flash-message');
 
+    if (flashMessage) {
+        setTimeout (() => {
+            flashMessage.remove();
+        }, 10000);
+    }
+    </script>
     <?php require __DIR__ . '/../partials/footer.php'; ?>
 

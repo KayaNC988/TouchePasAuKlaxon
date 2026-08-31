@@ -3,8 +3,14 @@
 <main class="container my-5">
 
     <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success mb-4" role="alert">
+        <div class="alert alert-success mb-4" id="flash-message" role="alert">
             <?= htmlspecialchars($_SESSION['success']) ?>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="fermer">
+    </button>
         </div>
 
         <?php unset($_SESSION['success']); ?>
@@ -225,5 +231,13 @@
     <?php endif; ?>
 
 </main>
+<script>
+    const flashMessage = document.getElementById('flash-message');
 
+    if (flashMessage) {
+        setTimeout (() => {
+            flashMessage.remove();
+        }, 10000);
+    }
+    </script>
 <?php require __DIR__ . '/partials/footer.php'; ?>

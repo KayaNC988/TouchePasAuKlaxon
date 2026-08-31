@@ -11,14 +11,52 @@
         <nav class="navbar navbar-dark bg-primary rounded px-3 py-2">
         <a class="navbar-brand text-white" href="/">Touche Pas Au Klaxon</a>
 
-        <?php if (isset($_SESSION['user'])): ?>
-            <div class="d-flex align-items-center gap-3">
-                <a href="/trajets/create" class="btn btn-light">Créer un trajet</a>
-            <span class="text-white me-3">Bonjour, <?= htmlspecialchars($_SESSION['user']['prenom']) ?>!</span>
-            <a href="/logout" class="btn btn-outline-light">Se déconnecter</a>
-            </div>
-        <?php else: ?>
-            <a href="/login" class="btn btn-outline-light">Se connecter</a>
-        <?php endif; ?>
+     <?php if (isset($_SESSION['user']) && ($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+
+    <div class="d-flex align-items-center gap-3">
+        <a href="/admin/users" class="btn btn-light">
+            Utilisateurs
+        </a>
+
+        <a href="/admin/agences" class="btn btn-light">
+            Agences
+        </a>
+
+        <a href="/admin/trajets" class="btn btn-light">
+            Trajets
+        </a>
+
+        <span class="text-white me-3">
+            Bonjour, <?= htmlspecialchars($_SESSION['user']['prenom']) ?> !
+        </span>
+
+        <a href="/logout" class="btn btn-outline-light">
+            Se déconnecter
+        </a>
+    </div>
+
+<?php elseif (isset($_SESSION['user'])): ?>
+
+    <div class="d-flex align-items-center gap-3">
+        <a href="/trajets/create" class="btn btn-light">
+            Créer un trajet
+        </a>
+
+        <span class="text-white me-3">
+            Bonjour, <?= htmlspecialchars($_SESSION['user']['prenom']) ?> !
+        </span>
+
+        <a href="/logout" class="btn btn-outline-light">
+            Se déconnecter
+        </a>
+    </div>
+
+<?php else: ?>
+
+    <a href="/login" class="btn btn-outline-light">
+        Se connecter
+    </a>
+
+<?php endif; ?>
         </nav>
     </header>

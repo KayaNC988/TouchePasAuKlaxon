@@ -40,7 +40,8 @@ INSERT INTO users (nom, prenom, telephone, email, password, role) VALUES
 ('Girard', 'Sarah', '0688665544', 'sarah.girard@email.fr', @password_test, 'user'),
 ('Lambert', 'Hugo', '0611223366', 'hugo.lambert@email.fr', @password_test, 'user'),
 ('Masson', 'Julie', '0733445566', 'julie.masson@email.fr', @password_test, 'user'),
-('Henry', 'Arthur', '0666554433', 'arthur.henry@email.fr', @password_test, 'user');
+('Henry', 'Arthur', '0666554433', 'arthur.henry@email.fr', @password_test, 'user'),
+('Administrateur', 'klaxon', '060000000', 'admin@klaxon.fr', @password_test, 'admin');
 
 
 INSERT INTO trajets (
