@@ -63,5 +63,5 @@ require __DIR__ . '/../partials/header.php'; ?>
         }, 10000);
     }
     </script>
-    <?php require __DIR__ . '/../partials/footer.php'; ?>
+    <?php require __DIR__ . '/../partials/footer.php' ?>;
 

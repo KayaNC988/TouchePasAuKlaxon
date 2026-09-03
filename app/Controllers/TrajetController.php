@@ -2,8 +2,19 @@
 
 namespace App\Controllers;
 
+/**
+ * *contrôleur charger de la gestion des trajets.
+ * 
+ * Il permet d'afficher, créer, modifier et supprimer les trajets de l'application.
+ */
 class TrajetController
 {
+    /**
+     * Affiche les détails d'un trajet spécifique.
+     * 
+     * @param int $id L'identifiant du trajet à afficher.
+     * @return void
+     */
     public function show(int $id): void
     {
 
@@ -25,7 +36,13 @@ class TrajetController
 
         require __DIR__ . '/../views/trajets/show.php';
     }
-   
+   /**
+    * Affiche le formulaire d'édition pour un trajet spécifique.
+    *
+    * Vérifie que l'utilisateur connecté est bien l'auteur du trajet.
+    * @param int $id L'identifiant du trajet à éditer.
+    * @return void 
+    */
     public function edit(int $id): void
 {
     if (!isset($_SESSION['user'])) {
@@ -55,9 +72,13 @@ class TrajetController
 
     require __DIR__ . '/../views/trajets/edit.php';
 }
-
-   
-
+/**
+ * Met à jour un trajet existant.
+ * 
+ * Vérifie les données saisieset que l'utilisateur du connecté est bien l'auteur du trajet avant la modification.
+ * @param int $id L'identifiant du trajet à modifier.
+ * @return void
+ */
     public function update(int $id): void
 {
     if (!isset($_SESSION['user'])) {
@@ -143,7 +164,14 @@ class TrajetController
     header("Location: /trajets/$id");
     exit;
 }
-
+/**
+ * Supprime un trajet existant.
+ * 
+ * Vérifie que l'utilisateur connecté est bien l'auteur du trajet avant d'autoriser la suppression.
+ * 
+ * @param int $id L'identifiant du trajet à supprimer.
+ * @return void
+ */
 public function delete(int $id): void
 {
     if (!isset($_SESSION['user'])) {
@@ -185,7 +213,14 @@ public function delete(int $id): void
     exit;
 }
 
- public function create(): void
+/**
+ * Affiche le formulaire de création d'un nouveau trajet.
+ *
+ * Charge la liste des agences et les informations nécessaire à la création d'un nouveau trajet.
+ * 
+ * @return void
+ */
+public function create(): void
     {
         $_SESSION['success'] = 'Trajet créé avec succès.';
 
@@ -200,7 +235,13 @@ public function delete(int $id): void
 
         require __DIR__ . '/../views/trajets/create.php';
     }
-
+/**
+ * Enregistre un nouveau trajet dans la base de données.
+ * 
+ * Vérifie la validité des informations saisies avant d'effectuer l'insertion du trajet.
+ * 
+ * @return void
+ */
 public function store(): void
 {
     if (!isset($_SESSION['user'])) {

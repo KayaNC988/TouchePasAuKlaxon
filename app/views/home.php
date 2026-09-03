@@ -22,7 +22,7 @@
         </h2>
     <?php else: ?>
         <h2 class="mb-4 text-secondary">
-            Veuillez vous connecter pour consulter les détails des trajets
+            Pour obtenir plus d'informations sur un trajet, veuillez vous connecter
         </h2>
     <?php endif; ?>
 

@@ -3,15 +3,30 @@
 namespace App\Controllers;
 use PDO;
 
+/**
+ * * Contrôleur chargé de la gestion de l'authentification des utilisateurs.
+ * 
+ * Il permet de gérer la connexion, la déconnexion et l'affichage du formulaire de connexion.
+ */
 class AuthController
 {                   
-
+/**
+ * Affiche le formulaire de connexion.
+ * 
+ * @return void
+ */
    public function showLogin(): void
  {
      require __DIR__ . '/../views/login.php';
  }
 
-
+/**
+ * Authentifie un utilisateur à partir de son email et de son mot de passe.
+ * 
+ * En cas de succés, les informations de l'utilisateur sont enregistrés dans la session et l'utilisateur est redirigé vers la page d'accueil.
+ * 
+ * @return void
+ */
     public function Login(): void
     {
         $email = $_POST['email'] ?? '';
@@ -43,7 +58,13 @@ class AuthController
         }
        
     }
-
+/**
+ * Déconnecte l'utilisateur actuellement connecté.
+ *
+ * Supprime les données de session puis redirige l'utilisateur vers la page d'accueil.
+ * 
+ * @return void
+ */
     public function logout(): void
     {
         session_unset();

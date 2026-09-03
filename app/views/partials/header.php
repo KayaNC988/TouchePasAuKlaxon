@@ -31,7 +31,7 @@
         </span>
 
         <a href="/logout" class="btn btn-outline-light">
-            Se déconnecter
+            Déconnexion
         </a>
     </div>
 
@@ -47,7 +47,7 @@
         </span>
 
         <a href="/logout" class="btn btn-outline-light">
-            Se déconnecter
+            Déconnexion
         </a>
     </div>
 

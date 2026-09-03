@@ -3,9 +3,20 @@
 namespace App\Controllers;
 
 use PDO;
-
+/**
+ * Contrôleur chargé de la gestion de l'administration de l'application.
+ * 
+ * Il permet à l'administrateur de consulter la liste des utilisateurs, de gérer les agences et de gérer les trajets.
+ */
 class AdminController
 {
+    /**
+     * Vérifie que l'utilisateur connecté possède le rôle d'administrateur.
+     * 
+     * Redirige vers la page d'accueil si l'utilisateur n'est pas connecté ou n'a pas le rôle d'administrateur.
+     * 
+     * @return void
+     */
     private function checkAdmin(): void
     {
         if (
@@ -16,7 +27,11 @@ class AdminController
             exit;
         }
     }
-
+/**
+ * Affiche la liste des utilisateurs de l'application.
+ * 
+ * @return void
+ */
     public function users(): void
     {
         $this->checkAdmin();
@@ -33,31 +48,45 @@ class AdminController
 
         require __DIR__ . '/../views/admin/users.php';
     }
-
-    public function agences(): void 
+/**
+ * Affiche la liste des agences de l'application.
+ *
+ * @return void
+ */
+    public function agences(): void
     {
         $this->checkAdmin();
 
         require __DIR__ . '/../../config/database.php';
 
         $stmt = $pdo->query(
-           'SELECT id, ville
-            FROM agences
-            ORDER BY ville ASC'
+            'SELECT id, ville
+             FROM agences
+             ORDER BY ville ASC'
         );
 
         $agences = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         require __DIR__ . '/../views/admin/agences.php';
     }
-
+/**
+ * Affiche le formulaire de création d'une nouvelle agence.
+ * 
+ * @return void
+ */
     public function createAgence(): void 
     {
          $this->checkAdmin();
 
          require __DIR__ . '/../views/admin/agences-create.php';
     }
-
+/**
+ * Enregistre une nouvelle agence dans la base de données.
+ * 
+ * Vérifie que le nom de la ville a bien été renseigné avant d'effectuer l'insertion de l'agence.
+ * 
+ * @return void
+ */
     public function storeAgence(): void
 {
     $this->checkAdmin();
@@ -85,7 +114,12 @@ class AdminController
     header('Location: /admin/agences');
     exit;
 }
-
+/**
+ * Affiche le formulaire de modification d'une agence existante.
+ * 
+ * @param int $id L'identifiant de l'agence à modifier.
+ * @return void
+ */
 public function editAgence(int $id): void
 {
     $this->checkAdmin();
@@ -111,7 +145,14 @@ public function editAgence(int $id): void
 
     require __DIR__ . '/../views/admin/agences-edit.php';
 }
-
+/**
+ * Met à jour les informations d'une agence existante dans la base de données.
+ * 
+ * Vérifie que le nom de la ville a bien été renseigné avant d'enregistrer les modifications dans la base de données.
+ * 
+ * @param int $id L'identifiant de l'agence à modifier.
+ * @return void
+ */
 public function updateAgence(int $id): void
 {
     $this->checkAdmin();
@@ -143,6 +184,14 @@ public function updateAgence(int $id): void
     exit;
 }
 
+/**
+ * Supprime une agence de la base de données.
+ *
+ * Vérifie que l'agence n'est pas utilisée par un trajet avant de procéder à la suppression.
+ * 
+ * @param int $id L'identifiant de l'agence à supprimer.
+ * @return void
+ */
 public function deleteAgence(int $id): void
 {
     $this->checkAdmin();
@@ -184,7 +233,13 @@ public function deleteAgence(int $id): void
     header('Location: /admin/agences');
     exit;
 }
-
+/**
+ * Affiche la liste des trajets dans l'espace administrateur.
+ *
+ * Récupère les informations des trajets, des agences de départ et d'arrivée ainsi que l'identité de leur auteur.
+ * 
+ * @return void
+ */
     public function trajets(): void
 {
     $this->checkAdmin();
@@ -216,7 +271,12 @@ public function deleteAgence(int $id): void
 
     require __DIR__ . '/../views/admin/trajets.php';
 }
-
+/**
+ * Supprime un trajet depuis l'espace administrateur.
+ *
+ * @param int $id L'identifiant du trajet à supprimer.
+ * @return void
+ */
 public function deleteTrajet(int $id): void
 {
     $this->checkAdmin();
